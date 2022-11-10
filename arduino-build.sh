@@ -65,7 +65,7 @@ fi
 
 
 has_SAMDtimer_lib() {
-	$ARDUINO_CLI lib list avdweb_SAMDtimer | cut -d ' ' -f2 | grep 1.0.0 || true
+	$ARDUINO_CLI lib list 'avdweb_SAMDtimer' --format json | jq ".[0].library.version" | grep 1.0.0 || true
 }
 HAS_SAMDTIMER_LIB="$(has_SAMDtimer_lib)"
 if [ -z "$HAS_SAMDTIMER_LIB" ]; then
@@ -76,7 +76,7 @@ if [ -z "$HAS_SAMDTIMER_LIB" ]; then
 fi
 
 has_ZeroTimer_lib() {
-	$ARDUINO_CLI lib list Adafruit_ZeroTimer_Library | cut -d ' ' -f2 | grep 1.0.1 || true
+	$ARDUINO_CLI lib list 'Adafruit ZeroTimer Library' --format json | jq ".[0].library.version" | grep 1.0.1 || true
 }
 HAS_ZEROTIMER_LIB="$(has_ZeroTimer_lib)"
 if [ -z "$HAS_ZEROTIMER_LIB" ]; then
@@ -87,7 +87,7 @@ if [ -z "$HAS_ZEROTIMER_LIB" ]; then
 fi
 
 has_BusIO_lib() {
-	$ARDUINO_CLI lib list Adafruit_BusIO | cut -d ' ' -f2 | grep 1.8.2 || true
+	$ARDUINO_CLI lib list 'Adafruit BusIO' --format json | jq ".[0].library.version" | grep 1.8.2 || true
 }
 HAS_BUSIO_LIB="$(has_BusIO_lib)"
 if [ -z "$HAS_BUSIO_LIB" ]; then
@@ -98,7 +98,7 @@ if [ -z "$HAS_BUSIO_LIB" ]; then
 fi
 
 has_GFX_lib() {
-	$ARDUINO_CLI lib list Adafruit_GFX_Library | cut -d ' ' -f2 | grep 1.10.10 || true
+	$ARDUINO_CLI lib list 'Adafruit GFX Library' --format json | jq ".[0].library.version" | grep 1.10.10 || true
 }
 HAS_GFX_LIB="$(has_GFX_lib)"
 if [ -z "$HAS_GFX_LIB" ]; then
@@ -109,7 +109,7 @@ if [ -z "$HAS_GFX_LIB" ]; then
 fi
 
 has_SSD1306_lib() {
-	$ARDUINO_CLI lib list Adafruit_SSD1306 | cut -d ' ' -f2 | grep 2.4.6 || true
+	$ARDUINO_CLI lib list 'Adafruit SSD1306' --format json | jq ".[0].library.version" | grep 2.4.6 || true
 }
 HAS_SSD1306_LIB="$(has_SSD1306_lib)"
 if [ -z "$HAS_SSD1306_LIB" ]; then
@@ -120,7 +120,7 @@ if [ -z "$HAS_SSD1306_LIB" ]; then
 fi
 
 has_SdFat_lib() {
-	$ARDUINO_CLI lib list SdFat | cut -d ' ' -f2 | grep 2.0.6 || true
+	$ARDUINO_CLI lib list SdFat --format json | jq ".[0].library.version" | grep 2.0.6 || true
 }
 HAS_SDFAT_LIB="$(has_SdFat_lib)"
 if [ -z "$HAS_SDFAT_LIB" ]; then
@@ -131,7 +131,7 @@ if [ -z "$HAS_SDFAT_LIB" ]; then
 fi
 
 has_HIDPROJECT_lib() {
-	$ARDUINO_CLI lib list HID-Project | cut -d ' ' -f2 | grep 2.6.1 || true
+	$ARDUINO_CLI lib list HID-Project --format json | jq ".[0].library.version" | grep 2.6.1 || true
 }
 HAS_HIDPROJECT_LIB="$(has_HIDPROJECT_lib)"
 if [ -z "$HAS_HIDPROJECT_LIB" ]; then
@@ -155,12 +155,12 @@ fi
 
 
 has_ASFCORE_lib() {
-	$ARDUINO_CLI lib list | grep Adafruit_ASFcore || true
+	$ARDUINO_CLI lib list | grep 'Adafruit Arduino Zero ASF Core Library ' || true
 }
 HAS_ASFCORE_LIB="$(has_ASFCORE_lib)"
 if [ -z "$HAS_ASFCORE_LIB" ]; then
     echo "Installing ASF Core library..."
-    wget -O "${ARDUINO_LIB_DIR}/Adafruit_ASFcore.zip" https://github.com/adafruit/Adafruit_ASFcore/archive/master.zip
+    wget --no-check-certificate -O "${ARDUINO_LIB_DIR}/Adafruit_ASFcore.zip" https://github.com/adafruit/Adafruit_ASFcore/archive/master.zip
     unzip "${ARDUINO_LIB_DIR}/Adafruit_ASFcore.zip" -d "${ARDUINO_LIB_DIR}/"
     rm "${ARDUINO_LIB_DIR}/Adafruit_ASFcore.zip"
     echo "Installing ASF Core library OK"
